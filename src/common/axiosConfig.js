@@ -1,15 +1,29 @@
 
+
 import axios from 'axios'
+import Vue from 'vue'
+import element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(element)
+
 const baseURL = process.env.VUE_APP_API_HOST
 axios.defaults.baseURL = baseURL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
+    let token = sessionStorage.getItem('userToken')
+    if (token) {
+        config.headers['Authorization'] = "Bearer "+token
+    }
     // 在发送请求之前做些什么
     return config;
 }, function (error) {
     // 对请求错误做些什么
+    Vue.prototype.$message({
+        message: error,
+        type: 'error'
+    });
     return Promise.reject(error);
 });
 
@@ -19,6 +33,10 @@ axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     // 对响应错误做点什么
+    Vue.prototype.$message({
+        message: error,
+        type: 'error'
+    });
     return Promise.reject(error);
 });
 
