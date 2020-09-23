@@ -23,6 +23,9 @@ Vue.prototype.$APIURL = apiUrl;
 //vuex
 Vue.prototype.$store = store;
 
+//全局过滤器
+import './common/globalFilter'
+
 new Vue({
   router,
   store,

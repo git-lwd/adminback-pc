@@ -6,7 +6,7 @@
           <el-image class="login-logo" :src="logo" fit="cover"></el-image>
           <h3 class="ml-10">欢迎登录数据管理后台</h3>
         </div>
-        <el-form :model="form" :rules="rules" ref="ruleForm" label-width="70px">
+        <el-form :model="form" :rules="rules" ref="ruleForm" label-width="70px" :hide-required-asterisk="false">
           <el-form-item label="用户名" prop="name">
             <el-input v-model="form.name" placeholder="请输入用户名" clearable></el-input>
           </el-form-item>

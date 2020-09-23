@@ -9,7 +9,9 @@
       </el-table-column>
       <el-table-column prop="phone" label="手机号" align="center"></el-table-column>
       <el-table-column prop="age" label="年龄" align="center"></el-table-column>
-      <el-table-column prop="gender" label="性别" align="center"></el-table-column>
+      <el-table-column prop="gender" label="性别" align="center">
+        <template slot-scope="scope">{{scope.row.gender==0?'女':'男'}}</template>
+      </el-table-column>
       <el-table-column prop="birthday" label="生日" align="center"></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
@@ -66,8 +68,9 @@ export default {
     },
 
     updateUser(index, obj) {
-      this.showDialog = true;
+      console.log(obj)
       this.itemInfo = obj;
+      this.showDialog = true;
     },
 
     deleteUser(id) {
@@ -114,7 +117,7 @@ export default {
       this.findAllUser();
     },
     headerCellStyle() {
-      let style = { background: "#f5f5f5" };
+      let style = { background: "#fafafa" };
       return style;
     },
   },

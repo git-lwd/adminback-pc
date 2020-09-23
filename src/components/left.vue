@@ -4,8 +4,6 @@
     class="el-menu-vertical-demo"
     :unique-opened="true"
     :router="true"
-    @open="handleOpen"
-    @close="handleClose"
     background-color="#545c64"
     text-color="#fff"
     active-text-color="#f5f5f5"
@@ -26,8 +24,8 @@
         <i class="el-icon-s-grid"></i>
         <span>帖子管理</span>
       </template>
-      <el-menu-item index="/index/user">帖子分类</el-menu-item>
-      <el-menu-item index="/index/user">帖子列表</el-menu-item>
+      <el-menu-item index="/category">帖子分类</el-menu-item>
+      <el-menu-item index="/forum">帖子列表</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>
@@ -40,12 +38,6 @@ export default {
     };
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
   },
 };
 </script>

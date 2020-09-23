@@ -4,6 +4,16 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@pages/login/login.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('@pages/login/register.vue')
+  },
+  {
     path: '/',
     name: 'Index',
     component: () => import('@pages/index/index.vue'),
@@ -22,20 +32,26 @@ const routes = [
         name: "User",
         component: () => import("@pages/userIndex/user.vue"),
         meta: {
-          title: '用户管理'
+          title: '用户列表'
+        }
+      },
+      {
+        path: '/category',
+        name: "category",
+        component: () => import("@pages/forumIndex/category.vue"),
+        meta: {
+          title: '帖子分类'
+        }
+      },
+      {
+        path: '/forum',
+        name: "forum",
+        component: () => import("@pages/forumIndex/forum.vue"),
+        meta: {
+          title: '帖子列表'
         }
       }
     ]
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@pages/login/login.vue')
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: () => import('@pages/login/register.vue')
   }
 ]
 
