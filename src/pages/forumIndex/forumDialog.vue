@@ -49,6 +49,11 @@
           </el-select>
         </el-col>
       </el-form-item>
+      <el-form-item label="帖子分类" prop="title">
+        <el-col :span="20">
+          <vue-ueditor-wrap v-model="form.content" :config="ueConfig"></vue-ueditor-wrap>
+        </el-col>
+      </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" @click="formSubmit">确 定</el-button>
@@ -58,8 +63,10 @@
 </template>
 
 <script>
+import VueUeditorWrap from "vue-ueditor-wrap";
 export default {
-  name: "categoryDialog",
+  name: "forumDialog",
+  components: { VueUeditorWrap },
   props: {
     showDialog: {
       type: Boolean,
@@ -71,6 +78,7 @@ export default {
     return {
       dialogTitle: "新增帖子",
       visibleDialog: false,
+      ueConfig: {},
       form: {
         title: "",
         subtitle: "",
