@@ -7,7 +7,7 @@
     width="600px"
     title="修改用户信息"
   >
-    <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+    <el-form ref="ruleForm" :model="form" :rules="rules" label-width="100px">
       <el-form-item label="手机号" prop="phone">
         <el-col :span="10">
           <el-input
@@ -46,13 +46,13 @@
       </el-form-item>
       <el-form-item label="生日">
         <el-col :span="10">
-          <el-input v-model="form.birthday" clearable></el-input>
+          <el-date-picker v-model="form.birthday" type="date" placeholder="选择日期"></el-date-picker>
         </el-col>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="handleClose">取 消</el-button>
       <el-button type="primary" @click="submitUser">确 定</el-button>
+      <el-button @click="handleClose">取 消</el-button>
     </div>
   </el-dialog>
 </template>
@@ -65,6 +65,7 @@ export default {
       type: Boolean,
       default: false,
     },
+    itemInfo: null,
   },
   data() {
     return {
@@ -76,7 +77,7 @@ export default {
         gender: 0,
         birthday: "",
       },
-      uploadAction: process.env.VUE_APP_API_HOST + "upload",
+      uploadAction: process.env.VUE_APP_API_HOST + "open/upload",
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("userToken"),
       },
@@ -92,10 +93,26 @@ export default {
     showDialog(val) {
       this.visibleDialog = val;
     },
+    itemInfo(val) {
+      if (val) {
+        this.form = {
+          id: val.id,
+          phone: val.phone,
+          pic: val.pic,
+          age: val.age,
+          gender: val.gender,
+          birthday: val.birthday,
+        };
+      }
+    },
   },
   methods: {
     handleAvatarSuccess(res) {
-      this.form.pic = res.path;
+       if (res.code == 0) {
+        this.form.pic = process.env.VUE_APP_IMG_HOST + res.path;
+      } else {
+        this.$message.error('上传失败')
+      }
     },
     beforeAvatarUpload(file) {
       // 判断图片的类型
@@ -114,9 +131,11 @@ export default {
       return isJpg && isLt2M;
     },
     handleClose() {
+      this.$refs.ruleForm.resetFields();
       this.$emit("closeDialog");
     },
     submitUser() {
+      console.log('ssss',this.form)
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           this.$axios({

@@ -39,6 +39,7 @@ export default {
   width: calc(100% - 170px);
   padding: 10px;
   box-sizing: border-box;
+  // background: #f0f2f5;
 }
 /deep/.el-menu-item{
     padding: 0 0 0 40px;
