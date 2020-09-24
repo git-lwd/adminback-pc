@@ -13,6 +13,7 @@ const APIURL = {
     createForum: "forum/create",
     updateForum: "forum/update",
     deleteForum: "forum/delete",
+    upload: "oepn/upload",
 }
 
 export default APIURL

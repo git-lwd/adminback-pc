@@ -51,7 +51,7 @@
       </el-form-item>
       <el-form-item label="帖子分类" prop="title">
         <el-col :span="20">
-          <vue-ueditor-wrap v-model="form.content" :config="ueConfig"></vue-ueditor-wrap>
+          <UEditor v-model="form.content"></UEditor>
         </el-col>
       </el-form-item>
     </el-form>
@@ -63,10 +63,10 @@
 </template>
 
 <script>
-import VueUeditorWrap from "vue-ueditor-wrap";
+import UEditor from "../../components/UEditor";
 export default {
   name: "forumDialog",
-  components: { VueUeditorWrap },
+  components: { UEditor },
   props: {
     showDialog: {
       type: Boolean,
@@ -78,7 +78,6 @@ export default {
     return {
       dialogTitle: "新增帖子",
       visibleDialog: false,
-      ueConfig: {},
       form: {
         title: "",
         subtitle: "",
