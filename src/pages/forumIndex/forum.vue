@@ -89,7 +89,7 @@ export default {
       })
         .then(() => {
           this.$axios
-            .delete(this.$APIURL.deleteCategory, { params: { id } })
+            .delete(this.$APIURL.deleteForum, { params: { id } })
             .then((res) => {
               if (res.data.code == 0) {
                 this.$message.success("删除成功");

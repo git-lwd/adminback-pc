@@ -4,13 +4,18 @@
     :close-on-click-modal="false"
     :close-on-press-escape="false"
     :before-close="handleClose"
-    width="50%"
+    width="60%"
     :title="dialogTitle"
   >
     <el-form ref="ruleForm" :model="form" :rules="rules" label-width="100px">
       <el-form-item label="标题" prop="title">
         <el-col :span="20">
-          <el-input v-model="form.title" maxlength="50" clearable placeholder="请输入"></el-input>
+          <el-input
+            v-model="form.title"
+            maxlength="50"
+            clearable
+            placeholder="请输入"
+          ></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="副标题" prop="subtitle">
@@ -39,19 +44,29 @@
       </el-form-item>
       <el-form-item label="作者" prop="author">
         <el-col :span="10">
-          <el-input v-model="form.author" maxlength="50" clearable placeholder="请输入"></el-input>
+          <el-input
+            v-model="form.author"
+            maxlength="50"
+            clearable
+            placeholder="请输入"
+          ></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="帖子分类" prop="title">
         <el-col :span="10">
           <el-select v-model="form.typeId" placeholder="请选择">
-            <el-option v-for="item in category" :key="item.id" :label="item.name" :value="item.id"></el-option>
+            <el-option
+              v-for="item in category"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            ></el-option>
           </el-select>
         </el-col>
       </el-form-item>
-      <el-form-item label="帖子分类" prop="title">
+      <el-form-item label="帖子内容" prop="title">
         <el-col :span="20">
-          <UEditor v-model="form.content"></UEditor>
+          <editor :value="form.content" @ueChange="ueChange"></editor>
         </el-col>
       </el-form-item>
     </el-form>
@@ -63,10 +78,10 @@
 </template>
 
 <script>
-import UEditor from "../../components/UEditor";
+import Editor from "@components/editor";
 export default {
   name: "forumDialog",
-  components: { UEditor },
+  components: { Editor },
   props: {
     showDialog: {
       type: Boolean,
@@ -111,8 +126,12 @@ export default {
         this.dialogTitle = "修改帖子";
         this.form = {
           id: val.id,
-          title: val.name,
+          title: val.title,
+          subtitle: val.subtitle,
           pic: val.pic,
+          content:val.content,
+          author: val.author,
+          typeId: val.typeId,
         };
       }
     },
@@ -157,6 +176,10 @@ export default {
       };
       this.$refs.ruleForm.resetFields();
       this.$emit("closeDialog");
+    },
+    ueChange(val) {
+      this.form.content = val;
+      console.log(val);
     },
     formSubmit() {
       console.log(this.form);
@@ -207,5 +230,6 @@ export default {
   width: 150px;
   height: 150px;
   display: block;
+  object-fit: cover;
 }
 </style>
