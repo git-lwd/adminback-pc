@@ -26,6 +26,7 @@ export default {
 };
 </script>
 <style lang="scss">
+@import '../src/common/common.css';
 body {
   margin: 0;
 }

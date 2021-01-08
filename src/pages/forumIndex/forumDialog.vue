@@ -179,7 +179,6 @@ export default {
     },
     ueChange(val) {
       this.form.content = val;
-      console.log(val);
     },
     formSubmit() {
       console.log(this.form);

@@ -24,25 +24,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main-box{
-    height: calc(100vh - 61px);
-    display: flex;
+.main-box {
+  height: calc(100vh - 61px);
+  display: flex;
 }
 .left-menu {
   width: 170px;
   height: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
 }
-/deep/.el-menu{
-    height: 100%;
+/deep/.el-menu {
+  height: 100%;
+  background: rgb(84, 92, 100);
 }
 .content {
-  width: calc(100% - 170px);
+  width: calc(100% - 165px);
   padding: 10px;
   box-sizing: border-box;
-  // background: #f0f2f5;
+  overflow: hidden;
+  overflow-y: scroll;
 }
-/deep/.el-menu-item{
-    padding: 0 0 0 40px;
-    min-width: 165px;
+/deep/.el-menu-item {
+  padding: 0 0 0 40px;
+  width: 165px;
 }
 </style>

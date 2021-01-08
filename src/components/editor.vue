@@ -19,7 +19,6 @@ export default {
   },
   watch: {
     value(val) {
-      console.log("赋值", val);
       this.editor.txt.html(val);
     },
   },
@@ -35,7 +34,7 @@ export default {
       // editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
       // 配置服务器端地址
       this.editor.customConfig = {
-        uploadImgServer: "http://127.0.0.1:3333/open/ue/upload",
+        uploadImgServer: process.env.VUE_APP_API_HOST + "/open/ue/upload",
         uploadFileName: "files",
       };
       this.editor.customConfig.uploadImgHeaders = {}; // 自定义 header
@@ -47,6 +46,7 @@ export default {
         this.$emit("ueChange", this.info); // 将内容同步到父组件中
       };
       this.editor.create();
+      this.editor.txt.html(this.value);
     },
   },
 };

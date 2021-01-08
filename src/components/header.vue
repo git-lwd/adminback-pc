@@ -3,23 +3,18 @@
     <div class="title">我的工作台</div>
     <div class="userInfo">
       <el-image class="userImg" :src="user.pic" fit="cover"></el-image>
-      <span class="userName">{{user.name}}</span>
-      <div class="logout" @click="logout">退出登录</div>
+      <span class="userName">{{ user.name }}</span>
+      <el-link class="logout" type="primary" @click="logout">退出登录</el-link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      user: "",
-    };
-  },
-  created() {
-    this.$nextTick(() => {
-      this.user = this.$store.state.userInfo.user;
-    });
+  computed:{
+    user(){
+      return this.$store.state.userInfo.user
+    }
   },
   methods: {
     logout() {
@@ -71,10 +66,6 @@ export default {
 .logout {
   font-size: 14px;
   margin-left: 20px;
-  cursor: pointer;
   color: #f5f5f5;
-}
-.logout:hover {
-  color: #ffffff;
 }
 </style>
